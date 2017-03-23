@@ -81,10 +81,8 @@ frame_t *tail;
 frame_t *current;
 
 extern bool isBuffer1;
-extern uint8_t current_buffer_count;
 extern buffer_t buffer1;
 extern buffer_t buffer2;
-buffer_t *current_buffer;
 
 void TSL1401Timer_IntHandler(void);
 void TSL1401ADC_IntHandler(void);

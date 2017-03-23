@@ -17,11 +17,9 @@
 #include "servo.h"
 #include "tsl1401.h"
 
-/*
- * CLK: PA2
- * SI: PA3
- * AOUT: PE3
- */
+buffer_t *current_buffer;
+uint8_t current_buffer_count;
+
 void TSL1401Config(void)
 {
 	ROM_SysCtlPeripheralEnable(CLK_GPIO_PERIPH);
@@ -74,6 +72,7 @@ void TSL1401Config(void)
 	ROM_TimerIntEnable(TSL1401_TIMER_BASE, TIMER_TIMA_TIMEOUT);
 	ROM_TimerEnable(TSL1401_TIMER_BASE, TIMER_A);
 
+	/* Initialize the linked list */
 	head = &frame4;
 	tail = &frame0;
 	frame0.next = &frame1;
@@ -86,7 +85,6 @@ void TSL1401Config(void)
 	frame2.frame_state = INITIAL;
 	frame3.frame_state = INITIAL;
 	frame4.frame_state = INITIAL;
-	UARTprintf("!!!!\n\n\n");
 
 	IntMasterEnable();
 }
